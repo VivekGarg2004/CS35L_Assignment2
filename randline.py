@@ -62,9 +62,11 @@ Output randomly selected lines from FILE."""
         generator = randline(input_file)
         for index in range(numlines):
             sys.stdout.write(generator.chooseline())
-    except IOError as (errno, strerror):
-        parser.error("I/O error({0}): {1}".
-                     format(errno, strerror))
+    except IOError as e:
+        errno = e.errno
+        strerror = e.strerror
+        parser.error("I/O error({0}): {1}".format(errno, strerror))
+
 
 if __name__ == "__main__":
     main()
