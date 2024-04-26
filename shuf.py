@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import random, sys
 import argparse
 
@@ -62,18 +63,23 @@ def main():
     head_count_option = args.get("head_count")
 
 
-
     contents = []
     if echo_option is None and not input_range_option:
         if len(args_option) > 1:
             parser.error(f"shuf: extra operand '{args_option[1]}'")
         elif len(args_option) == 1:
             filename = args_option[0]
-            try:
-                with open(filename, 'r') as f:
-                    contents = f.readlines()
-            except FileNotFoundError:     
-                parser.error(f"{filename}: No such file or directory")
+            if(filename == '-'):
+                try:
+                    contents = sys.stdin.readlines()
+                except FileNotFoundError:
+                    parser.error(f"no such file or directory: {sys.stdin}")
+            else:
+                try:
+                    with open(filename, 'r') as f:
+                        contents = f.readlines()
+                except FileNotFoundError:     
+                    parser.error(f"{filename}: No such file or directory")
         else:
             filename = None
             try:

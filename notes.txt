@@ -1,0 +1,128 @@
+
+Homework 2.1
+1. (* (expt 2 (- 607 1)) (- (expt 2 607) 1))
+
+Answer:
+141053783706712069063207958086063189881486743514715667838838675999954867742652380114104193329037690251561950568709829327164087724366370087116731268159313652487450652439805877296207297446723295166658228846926807786652870188920867879451478364569313922060370695064736073572378695176473055266826253284886383715072974324463835300053138429460296575143368065570759537328128
+
+2. 
+(let ((a (expt 2 (- 607 1))) (b (- (expt 2 607) 1)))                                                                                                         
+  (+ 1 (floor (+ (log a 2) (log b 2)))))	
+
+1214 bits needed 
+
+
+3. When I type C-h k C-h k it pulls up a detailed page of what C-h k does. This relates to the output from C-h b before because it includes descriptions of all the commands in that list. 
+
+
+4. When i type C-h k M-SPC it again gives me a detailed description of what M-SPC does this is because C-h k expects a keystroke to describe and M-SPC is the one that we choose so C-h k describes what M-SPC does
+
+5. the more general function is cycle-spacing
+
+
+
+Homework 2.2
+1. What happens when you invoke randline.py with /dev/null 
+$ python2 randline.py /dev/null
+
+
+Traceback (most recent call last):
+  File "randline.py", line 70, in <module>
+    main()
+  File "randline.py", line 64, in main
+    sys.stdout.write(generator.chooseline())
+  File "randline.py", line 34, in chooseline
+    return random.choice(self.lines)
+  File "/usr/lib64/python2.7/random.py", line 277, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is empty
+IndexError: list index out of range
+
+
+
+It fails beacuse /dev/null is a special file that holds no data so when randline sees an empty file it raises the IndexError because there is no data to read 
+
+
+2. Invoking randline.py with Python3
+$ python3 randline.py shuf.py
+
+  File "randline.py", line 65
+    except IOError as (errno, strerror):
+                      ^
+SyntaxError: invalid syntax
+
+In python3 this is no longer supported because now IOError does not allow you to unpack the error in the except arguement and you have to add a new line to unpack it into the variables you want
+
+3. Invoking shuf.py with python2
+$ python2 shuf.py randline.py
+
+  File "shuf.py", line 69
+    parser.error(f"shuf: extra operand '{args_option[1]}'")
+                                                         ^
+SyntaxError: invalid syntax
+
+There are going to be many syntax errors but I often used f strings to help format my error messages so that is the first bug that one would see. I think also the way I used print was not supported in python2. Also one would need to install argparse.
+
+
+4. 
+
+shuf.py on #!/usr/bin/python3 
+Median of User and System Times was:  0m0.973s
+Trial 1: user: 0m0.941s sys: 0m0.032s
+
+shuf.py on #!/usr/local/cs/bin/python3
+Median of User and System Times was:  0m0.636s
+Trial 1: user: 0m0.593s sys: 0m0.043s
+
+coreutils shuf command
+Median of User and System Times was:  0m0.070s
+Trial 3: user: 0m0.060s sys: 0m0.010s
+
+
+CPU Information
+rchitecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  4
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               85
+Model name:          Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz
+Stepping:            4
+CPU MHz:             2095.079
+BogoMIPS:            4190.15
+Hypervisor vendor:   Microsoft
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            1024K
+L3 cache:            16896K
+NUMA node0 CPU(s):   0-3
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology cpuid pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single pti ibrs ibpb stibp fsgsbase bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt avx512cd avx512bw avx512vl xsaveopt xsavec xsaves
+
+
+OS Information:
+
+AME="Red Hat Enterprise Linux"
+VERSION="8.5 (Ootpa)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="8.5"
+PLATFORM_ID="platform:el8"
+PRETTY_NAME="Red Hat Enterprise Linux 8.5 (Ootpa)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:8::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/red_hat_enterprise_linux/8/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 8"
+REDHAT_BUGZILLA_PRODUCT_VERSION=8.5
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="8.5"
+
+
